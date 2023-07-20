@@ -1,0 +1,73 @@
+.thead-dark {
+    background-color: #2EB070;
+}
+
+tr:nth-child(2n) {
+    background-color: #ccc;
+}
+
+button.centro {
+    border-radius: 8px;
+    border: none;
+    background-color: #e7e7e7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+div.centro {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+}
+
+
+
+div.centro > a {
+    border: none;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    padding: 3px 55px 3px 55px;
+    background-color: #2EB070;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 20px;
+
+}
+
+div.centro > a:hover {
+    color: white;
+    background-color: #2eb06fd6;
+}
+
+ion-icon {
+    font-size: 18px;
+    margin: 0px 5px;
+    color:white;
+}
+
+div.centro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button.centro > ion-icon {
+    color: black;
+
+}
+
+button.alterar {
+    transition: 250ms ease;
+
+}
+
+
+
+
