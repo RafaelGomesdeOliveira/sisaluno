@@ -1,7 +1,7 @@
 <?php
 include_once('../conexao.php');
 
-$retorno = $conn->prepare('SELECT * FROM Aluno');
+$retorno = $conn->prepare('SELECT * FROM Professor');
 $retorno->execute();
 
 ?>
@@ -12,18 +12,16 @@ $retorno->execute();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../style/lista.css">
-
 </head>
 
 <body>
@@ -32,9 +30,9 @@ $retorno->execute();
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Nome</th>
-        <th scope="col">Turma</th>
-        <th scope="col">Idade</th>
         <th scope="col">Matrícula</th>
+        <th scope="col">Idade</th>
+        <th scope="col">Área de atuação</th>
         <th scope="col">CPF</th>
         <th scope="col">Status</th>
         <th scope="col">Alterar</th>
@@ -45,50 +43,50 @@ $retorno->execute();
       <tbody>
         <tr>
           <th scope="row">
-            <?= $value['idAluno'] ?>
+            <?= $value['idProfessor'] ?>
           </th>
           <td>
-            <?= $value['nomeAluno'] ?>
+            <?= $value['nomeProfessor'] ?>
           </td>
           <td>
-            <?= strtoupper($value['turma']) ?>
+            <?= $value['matricula'] ?>
           </td>
           <td>
-            <?= $value['idadeAluno'] ?>
+            <?= $value['idadeProfessor'] ?>
           </td>
           <td>
-            <?= $value['matriculaAluno'] ?>
+            <?= $value['areaAtuacao'] ?>
           </td>
           <td>
             <?= $value['cpf'] ?>
           </td>
           <td>
-            <?php if (strtoupper($value['estatus']) == 'AP') {
-              echo "Aprovado";
-            } else if (strtoupper($value['estatus']) == 'RP') {
-              echo "Reprovado";
+            <?php if($value['estatusProfessor'] == 1){
+              echo "Ativo";  
+            }
+            else if ($value['estatusProfessor'] == 0) {
+              echo "Inativo";
             }
             ?>
           </td>
           <td>
-            <form action="alterarAluno.php" method="post">
-              <input type="hidden" name="id" value="<?= $value['idAluno'] ?>">
-              <button class="btn centro alterar" type="submit" name="alterarAluno">Alterar<ion-icon
-                  name="construct"></ion-icon>
-              </button>
+            <form action="alterarProfessor.php" method="post">
+              <input type="hidden" name="id" value="<?= $value['idProfessor'] ?>">
+              <button class="btn centro" type="submit" name="alterarProfessor">Alterar<ion-icon
+                  name="construct"></ion-icon></button>
             </form>
           </td>
           <td>
-            <form action="cudrAluno.php" method="get">
-              <input type="hidden" name="id" value="<?= $value['idAluno'] ?>">
+          <form action="cudrProfessor.php" method="get">
+              <input type="hidden" name="id" value="<?= $value['idProfessor'] ?>">
               <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                data-bs-target="#exampleModal<?php echo $value['idAluno'] ?>">
+                data-bs-target="#exampleModal<?php echo $value['idProfessor'] ?>">
                 Excluir<ion-icon name="trash-sharp"></ion-icon>
               </button>
 
               <!-- Modal -->
-              <div class="modal fade" id="exampleModal<?php echo $value['idAluno'] ?>" tabindex="-1"
-                aria-labelledby="exampleModalLabel<?php echo $value['idAluno'] ?>" aria-hidden="true">
+              <div class="modal fade" id="exampleModal<?php echo $value['idProfessor'] ?>" tabindex="-1"
+                aria-labelledby="exampleModalLabel<?php echo $value['idProfessor'] ?>" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -96,19 +94,15 @@ $retorno->execute();
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <p>Deseja realmente excluir o aluno
+                      <p>Você realmente deseja excluir o(a) professor(a)
                         <strong>
                           <?php
-                          echo $value['nomeAluno'];
+                          echo $value['nomeProfessor'];
                           ?>
-                        </strong>
-                        do
-                        <strong>
-                        <?php echo strtoupper($value['turma']);?>
                         </strong>
                         de id igual a <strong> 
                         <?php 
-                        echo $value['idAluno'];
+                        echo $value['idProfessor'];
                         ?>
                         </strong>
                         ?
@@ -116,9 +110,9 @@ $retorno->execute();
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      <form action="cudrAluno.php" method="get">
-                        <input type="hidden" name="id" value="<?= $value['idAluno'] ?>">
-                        <button class="btn btn-primary" type="submit" name="excluirAluno">Confirmar</button>
+                      <form action="cudrProfessor.php" method="get">
+                        <input type="hidden" name="id" value="<?= $value['idProfessor']?>">
+                        <button class="btn btn-primary" type="submit" name="excluirProfessor">Confirmar</button>
                       </form>
                     </div>
                   </div>

@@ -5,58 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../style/stylecadastrooo.css">
-    <script src="../javascript/index.js"></script>
-
-
+    <script src="../javascript/indexx.js"></script>
+    <link rel="stylesheet" href="../style/stylecadastro.css">
 </head>
 
 <body>
     <section id="formulario">
-        <form action="cudrAluno.php" method="post">
+        <form action="cudrProfessor.php" id="meuFormulario" method="post">
             <div class="titulo">
-                <h1>Cadastre-se aluno</h1>
+                <h1>Alterar professor</h1>
             </div>
             <div class="formularios">
                 <div class="input-container">
-                    <input placeholder="Nome" class="input-field" maxlength="50" type="text" name="nomeAluno" required>
+                    <input placeholder="Nome" class="input-field" type="text" name="nomeProfessor" required>
                     <label for="input-field" class="input-label">Nome:</label>
                     <span class="input-highlight"></span>
                 </div>
 
-                <div class="input-container metade">
-                    <input placeholder="Turma" class="input-field" maxlength="4" type="text" name="turmaAluno"required>
-                    <label for="input-field" class="input-label">Turma:</label>
+                <div class="input-container maior">
+                    <input placeholder="Área atuação" class="input-field" type="text" name="areaAtuacao" required>
+                    <label for="input-field" class="input-label">Área de atuação:</label>
                     <span class="input-highlight"></span>
                 </div>
 
-                <div class="input-container metade">
-                    <input placeholder="Idade" class="input-field" type="number" name="idadeAluno" max="150" required min="1">
+                <div class="input-container menor">
+                    <input placeholder="Idade" class="input-field" type="number" name="idadeProfessor" required>
                     <label for="input-field" class="input-label">Idade:</label>
                     <span class="input-highlight"></span>
                 </div>
 
                 <div class="input-container">
-                    <input placeholder="Matrícula" class="input-field" maxlength="20" type="text" name="matriculaAluno" required>
+                    <input placeholder="Matrícula" class="input-field" type="text" name="matricula" required>
                     <label for="input-field" class="input-label">Matrícula:</label>
                     <span class="input-highlight"></span>
                 </div>
 
                 <div class="input-container">
-                    <input placeholder="CPF" class="input-field" type="text" name="cpfAluno" required oninput="mascara(this)">
+                    <input placeholder="CPF" class="input-field" type="text" name="cpfProfessor" required min="14"
+                        max="14" oninput="mascara(this)">
                     <label for="input-field" class="input-label">CPF:</label>
                     <span class="input-highlight"></span>
                 </div>
-
                 <div class="input-container">
-                        <input placeholder="AP ou RP" class="input-field" type="text" name="estatus" required id="meuInput" oninput="validarInput(this)">
-                        <label for="input-field" class="input-label">Status</label>
-                        <span class="input-highlight"></span>
+                    <select placeholder="Selectione o estatus do professor" name="estatus" id="iestatus">
+                        <option value="ativo">Ativo</option>
+                        <option value="inativo">Inativo</option>
+                    </select>
+                    <label for="input-field" class="input-label">Estatus</label>
+                    <span class="input-highlight"></span>
                 </div>
-
                 <div class="botoes">
                     <a href="../index.html">Voltar</a>
-                    <input type="submit" value="Cadastrar" name="cadAluno">
+                    <input type="submit" value="Cadastrar" name="cadProfessor">
+                    
                 </div>
             </div>
 

@@ -12,6 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #2EB070;
+
 }
 
 section#formulario {
@@ -115,7 +116,7 @@ div.botoes > a:hover {
 }
 
 /* Input field */
-.input-field {
+.input-field, select {
     display: block;
     width: 100%;
     padding: 10px;
@@ -182,3 +183,18 @@ div.botoes > a:hover {
     align-items: center;
     color: gray;
 }
+
+/* .input-container {
+    font-size: 14px;
+
+} */
+
+select, option {
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    border-bottom: 2px solid #ccc;
+}
+
+
