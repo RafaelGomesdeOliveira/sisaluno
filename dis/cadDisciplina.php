@@ -21,13 +21,13 @@
                     <span class="input-highlight"></span>
                 </div>
 
-                <div class="input-container">
-                    <input placeholder="Quantidade de alunos" class="input-field" type="number" name="quantAluno" required min="0">
-                    <label for="input-field" class="input-label">Quantidade  de aluno:</label>
+                <div class="input-container metade">
+                    <input placeholder="N° alunos" class="input-field" type="number" name="quantAluno" required min="0">
+                    <label for="input-field" class="input-label">N° alunos:</label>
                     <span class="input-highlight"></span>
                 </div>
 
-                <div class="input-container">
+                <div class="input-container metade">
                     <input placeholder="Carga horária" class="input-field" type="number" name="ch" required min="1">
                     <label for="input-field" class="input-label">Carga horária:</label>
                     <span class="input-highlight"></span>
@@ -38,6 +38,18 @@
                     <label for="input-field" class="input-label">Pré-requisito:</label>
                     <span class="input-highlight"></span>
                 </div>
+                <div class="input-container metade">
+                    <input placeholder="ID Professor" class="input-field" type="text" name="idprofessor" required>
+                    <label for="input-field" class="input-label">ID Professor:</label>
+                    <span class="input-highlight"></span>
+                </div>
+
+                <div class="input-container metade">
+                    <input placeholder="Semestre" class="input-field" type="text" name="semestre" required>
+                    <label for="input-field" class="input-label">Semestre:</label>
+                    <span class="input-highlight"></span>
+                </div>
+
                 <div class="botoes">
                     <a href="../index.html">Voltar</a>
                     <input type="submit" value="Cadastrar" name="cadDisciplina">

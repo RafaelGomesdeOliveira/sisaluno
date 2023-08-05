@@ -1,7 +1,7 @@
 <?php
 include_once('../conexao.php');
 
-$retorno = $conn->prepare('SELECT * FROM Professor');
+$retorno = $conn->prepare('SELECT * FROM professor');
 $retorno->execute();
 
 ?>
@@ -30,10 +30,12 @@ $retorno->execute();
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Nome</th>
+        <th scope="col">Endereço</th>
         <th scope="col">Matrícula</th>
         <th scope="col">Idade</th>
         <th scope="col">Área de atuação</th>
         <th scope="col">CPF</th>
+        <th scope="col">Data nascimento</th>
         <th scope="col">Status</th>
         <th scope="col">Alterar</th>
         <th scope="col">Excluir</th>
@@ -43,16 +45,19 @@ $retorno->execute();
       <tbody>
         <tr>
           <th scope="row">
-            <?= $value['idProfessor'] ?>
+            <?= $value['id'] ?>
           </th>
           <td>
-            <?= $value['nomeProfessor'] ?>
+            <?= $value['nome'] ?>
+          </td>
+          <td>
+            <?= $value['endereco'] ?>
           </td>
           <td>
             <?= $value['matricula'] ?>
           </td>
           <td>
-            <?= $value['idadeProfessor'] ?>
+            <?= $value['idade'] ?>
           </td>
           <td>
             <?= $value['areaAtuacao'] ?>
@@ -61,32 +66,39 @@ $retorno->execute();
             <?= $value['cpf'] ?>
           </td>
           <td>
-            <?php if($value['estatusProfessor'] == 1){
-              echo "Ativo";  
-            }
-            else if ($value['estatusProfessor'] == 0) {
+            <?php
+            $dataNas = $value['datanascimento'];
+            $dataEmTempo = strtotime($dataNas);
+            $dataAjustada = date("d/m/Y", $dataEmTempo);
+            echo "$dataAjustada";
+            ?>
+          </td>
+          <td>
+            <?php if ($value['estatus'] == 1) {
+              echo "Ativo";
+            } else if ($value['estatus'] == 0) {
               echo "Inativo";
             }
             ?>
           </td>
           <td>
             <form action="alterarProfessor.php" method="post">
-              <input type="hidden" name="id" value="<?= $value['idProfessor'] ?>">
+              <input type="hidden" name="id" value="<?= $value['id'] ?>">
               <button class="btn centro" type="submit" name="alterarProfessor">Alterar<ion-icon
                   name="construct"></ion-icon></button>
             </form>
           </td>
           <td>
-          <form action="cudrProfessor.php" method="get">
-              <input type="hidden" name="id" value="<?= $value['idProfessor'] ?>">
+            <form action="cudrProfessor.php" method="get">
+              <input type="hidden" name="id" value="<?= $value['id'] ?>">
               <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                data-bs-target="#exampleModal<?php echo $value['idProfessor'] ?>">
+                data-bs-target="#exampleModal<?php echo $value['id'] ?>">
                 Excluir<ion-icon name="trash-sharp"></ion-icon>
               </button>
 
               <!-- Modal -->
-              <div class="modal fade" id="exampleModal<?php echo $value['idProfessor'] ?>" tabindex="-1"
-                aria-labelledby="exampleModalLabel<?php echo $value['idProfessor'] ?>" aria-hidden="true">
+              <div class="modal fade" id="exampleModal<?php echo $value['id'] ?>" tabindex="-1"
+                aria-labelledby="exampleModalLabel<?php echo $value['id'] ?>" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -97,13 +109,13 @@ $retorno->execute();
                       <p>Você realmente deseja excluir o(a) professor(a)
                         <strong>
                           <?php
-                          echo $value['nomeProfessor'];
+                          echo $value['nome'];
                           ?>
                         </strong>
-                        de id igual a <strong> 
-                        <?php 
-                        echo $value['idProfessor'];
-                        ?>
+                        de id igual a <strong>
+                          <?php
+                          echo $value['id'];
+                          ?>
                         </strong>
                         ?
                       </p>
@@ -111,7 +123,7 @@ $retorno->execute();
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                       <form action="cudrProfessor.php" method="get">
-                        <input type="hidden" name="id" value="<?= $value['idProfessor']?>">
+                        <input type="hidden" name="id" value="<?= $value['id'] ?>">
                         <button class="btn btn-primary" type="submit" name="excluirProfessor">Confirmar</button>
                       </form>
                     </div>

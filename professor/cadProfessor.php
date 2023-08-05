@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="../javascript/indexx.js"></script>
+    <script src="../javascript/logica.js"></script>
     <link rel="stylesheet" href="../style/stylecadastro.css">
 </head>
 
@@ -19,6 +19,13 @@
                 <div class="input-container">
                     <input placeholder="Nome" class="input-field" type="text" name="nomeProfessor" required>
                     <label for="input-field" class="input-label">Nome:</label>
+                    <span class="input-highlight"></span>
+                </div>
+
+                <div class="input-container">
+                    <input placeholder="Endereço" class="input-field" maxlength="50" type="text" name="endereco"
+                        required>
+                    <label for="input-field" class="input-label">Endereço:</label>
                     <span class="input-highlight"></span>
                 </div>
 
@@ -46,14 +53,20 @@
                     <label for="input-field" class="input-label">CPF:</label>
                     <span class="input-highlight"></span>
                 </div>
-                <div class="input-container">
+                <div class="input-container metade">
                     <select placeholder="Selectione o estatus do professor" name="estatus" id="iestatus">
                         <option value="ativo">Ativo</option>
                         <option value="inativo">Inativo</option>
                     </select>
-                    <label for="input-field" class="input-label">Estatus</label>
+                    <label for="input-field" class="input-label">Estatus:</label>
                     <span class="input-highlight"></span>
                 </div>
+                <div class="input-container metade">
+                    <input placeholder="Data nascimento" class="input-field" type="date" name="dataNascimento" required>
+                    <label for="input-field" class="input-label">Data nascimento:</label>
+                    <span class="input-highlight"></span>
+                </div>
+
                 <div class="botoes">
                     <a href="../index.html">Voltar</a>
                     <input type="submit" value="Cadastrar" name="cadProfessor">

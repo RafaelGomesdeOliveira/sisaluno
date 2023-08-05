@@ -5,13 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../style/stylecadastrooo.css">
-    <script src="../javascript/index.js"></script>
+    <link rel="stylesheet" href="../style/stylecadastro.css">
+    <script src="../javascript/logica.js"></script>
 
 
 </head>
 
 <body>
+    <?php
+    if (isset($_GET['alerta'])) {
+        ?>
+        <script>
+            alert("A sua data de nascimento não condiz com a sua idade");
+        </script>
+        <?php
+    }
+    ?>
+
     <section id="formulario">
         <form action="cudrAluno.php" method="post">
             <div class="titulo">
@@ -24,34 +34,51 @@
                     <span class="input-highlight"></span>
                 </div>
 
+                <div class="input-container">
+                    <input placeholder="Endereço" class="input-field" maxlength="50" type="text" name="endereco"
+                        required>
+                    <label for="input-field" class="input-label">Endereço:</label>
+                    <span class="input-highlight"></span>
+                </div>
+
                 <div class="input-container metade">
-                    <input placeholder="Turma" class="input-field" maxlength="4" type="text" name="turmaAluno"required>
+                    <input placeholder="Turma" class="input-field" maxlength="4" type="text" name="turmaAluno" required>
                     <label for="input-field" class="input-label">Turma:</label>
                     <span class="input-highlight"></span>
                 </div>
 
                 <div class="input-container metade">
-                    <input placeholder="Idade" class="input-field" type="number" name="idadeAluno" max="150" required min="1">
+                    <input placeholder="Idade" class="input-field" type="number" name="idadeAluno" max="150" required
+                        min="1">
                     <label for="input-field" class="input-label">Idade:</label>
                     <span class="input-highlight"></span>
                 </div>
 
                 <div class="input-container">
-                    <input placeholder="Matrícula" class="input-field" maxlength="20" type="text" name="matriculaAluno" required>
+                    <input placeholder="Matrícula" class="input-field" maxlength="20" type="text" name="matriculaAluno"
+                        required>
                     <label for="input-field" class="input-label">Matrícula:</label>
                     <span class="input-highlight"></span>
                 </div>
 
                 <div class="input-container">
-                    <input placeholder="CPF" class="input-field" type="text" name="cpfAluno" required oninput="mascara(this)">
+                    <input placeholder="CPF" class="input-field" type="text" name="cpfAluno" required
+                        oninput="mascara(this)">
                     <label for="input-field" class="input-label">CPF:</label>
                     <span class="input-highlight"></span>
                 </div>
 
-                <div class="input-container">
-                        <input placeholder="AP ou RP" class="input-field" type="text" name="estatus" required id="meuInput" oninput="validarInput(this)">
-                        <label for="input-field" class="input-label">Status</label>
-                        <span class="input-highlight"></span>
+
+                <div class="input-container metade">
+                    <input placeholder="AP ou RP" class="input-field" type="text" name="estatus" required id="meuInput"
+                        oninput="validarInput(this)">
+                    <label for="input-field" class="input-label">Status</label>
+                    <span class="input-highlight"></span>
+                </div>
+                <div class="input-container metade">
+                    <input placeholder="Data nascimento" class="input-field" type="date" name="dataNascimento" required>
+                    <label for="input-field" class="input-label">Data nascimento:</label>
+                    <span class="input-highlight"></span>
                 </div>
 
                 <div class="botoes">
@@ -67,6 +94,7 @@
 </body>
 
 </html>
+
 
 
 <!-- 

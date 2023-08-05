@@ -1,7 +1,7 @@
 <?php
 include_once('../conexao.php');
 
-$retorno = $conn->prepare('SELECT * FROM Disciplina');
+$retorno = $conn->prepare('SELECT * FROM disciplina');
 $retorno->execute();
 
 ?>
@@ -33,6 +33,9 @@ $retorno->execute();
         <th scope="col">Carga horária</th>
         <th scope="col">Quantidade de alunos</th>
         <th scope="col">Pré-requisito</th>
+        <th scope="col">Semestre</th>
+        <th scope="col">ID professor</th>
+        <th scope="col">Nome professor</th>
         <th scope="col">Alterar</th>
         <th scope="col">Excluir</th>
       </tr>
@@ -41,10 +44,10 @@ $retorno->execute();
       <tbody>
         <tr>
           <th scope="row">
-            <?= $value['idDisciplina'] ?>
+            <?= $value['id'] ?>
           </th>
           <td>
-            <?= $value['nomeDisciplina'] ?>
+            <?= $value['nomedisciplina'] ?>
           </td>
           <td>
             <?= $value['ch'] ?>
@@ -56,23 +59,42 @@ $retorno->execute();
             <?= $value['preRequisito'] ?>
           </td>
           <td>
+            <?= $value['semestre'] ?>
+          </td>
+          <td>
+            <?php
+            $idprofessorDis = $value['idprofessor'];
+            echo "$idprofessorDis";
+            ?>
+
+          </td>
+          <td>
+            <?php
+            $retornProfessor = $conn->prepare("SELECT nome FROM professor WHERE id = '$idprofessorDis'");
+            $retornProfessor->execute();
+            foreach ($retornProfessor->fetchall() as $valor) {
+              echo $valor['nome'];
+            }
+            ?>
+          </td>
+          <td>
             <form action="alterarDis.php" method="post">
-              <input type="hidden" name="id" value="<?= $value['idDisciplina'] ?>">
+              <input type="hidden" name="id" value="<?= $value['id'] ?>">
               <button class="btn alterar centro" type="submit" name="alterarDis">Alterar<ion-icon
                   name="construct"></ion-icon></button>
             </form>
           </td>
           <td>
-          <form action="cudrDisciplina.php" method="get">
-              <input type="hidden" name="id" value="<?= $value['idDisciplina'] ?>">
+            <form action="cudrDisciplina.php" method="get">
+              <input type="hidden" name="id" value="<?= $value['id'] ?>">
               <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                data-bs-target="#exampleModal<?php echo $value['idDisciplina'] ?>">
+                data-bs-target="#exampleModal<?php echo $value['id'] ?>">
                 Excluir<ion-icon name="trash-sharp"></ion-icon>
               </button>
 
               <!-- Modal -->
-              <div class="modal fade" id="exampleModal<?php echo $value['idDisciplina'] ?>" tabindex="-1"
-                aria-labelledby="exampleModalLabel<?php echo $value['idDisciplina'] ?>" aria-hidden="true">
+              <div class="modal fade" id="exampleModal<?php echo $value['id'] ?>" tabindex="-1"
+                aria-labelledby="exampleModalLabel<?php echo $value['id'] ?>" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -83,13 +105,13 @@ $retorno->execute();
                       <p>Você realmente deseja excluir a disciplina
                         <strong>
                           <?php
-                          echo $value['nomeDisciplina'];
+                          echo $value['nomedisciplina'];
                           ?>
                         </strong>
-                        de id igual a <strong> 
-                        <?php 
-                        echo $value['idDisciplina'];
-                        ?>
+                        de id igual a <strong>
+                          <?php
+                          echo $value['id'];
+                          ?>
                         </strong>
                         ?
                       </p>
@@ -97,8 +119,8 @@ $retorno->execute();
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                       <form action="cudrDisciplina.php" method="get">
-                        <input type="hidden" name="id" value="<?= $value['idDisciplina'] ?>">
-                        <button class="btn btn-primary" type="submit" name="excluirAluno">Confirmar</button>
+                        <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                        <button class="btn btn-primary" type="submit" name="excluirDis">Confirmar</button>
                       </form>
                     </div>
                   </div>

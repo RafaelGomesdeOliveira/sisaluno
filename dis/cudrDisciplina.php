@@ -3,11 +3,13 @@ include_once('../conexao.php');
 
 if (isset($_POST['cadDisciplina'])) {
     $nomeDis = $_POST['nomeDis'];
-    $quantAluno = $_POST['quantAluno'];
     $ch = $_POST['ch'];
     $pre_requisito = $_POST['requisito'];
+    $quantAluno = $_POST['quantAluno'];
+    $semestre = $_POST['semestre'];
+    $idprofessor = $_POST['idprofessor'];
 
-    $sql = "INSERT INTO Disciplina (nomeDisciplina, ch, quantAlunos, preRequisito, idDisciplina) VALUES('$nomeDis', '$ch', '$quantAluno', '$pre_requisito', DEFAULT)";
+    $sql = "INSERT INTO disciplina (nomedisciplina, ch, preRequisito, quantAlunos, semestre, id, idprofessor) VALUES('$nomeDis', '$ch', '$pre_requisito', '$quantAluno', '$semeste', DEFAULT, '$idprofessor')";
 
     $sqlBanco = $conn->prepare($sql);
 
@@ -25,10 +27,12 @@ if(isset($_POST['alterarDis'])){
     $ch = $_POST['ch'];
     $preRequisito = $_POST['requisito'];
     $idDis = $_POST['id'];
+    $idprofessor = $_POST['idprofessor'];   
+    $semestre = $_POST['semestre'];
 
 
 
-    $sql = "UPDATE Disciplina SET nomeDisciplina = :nome, ch = :ch, quantAlunos = :quantAlunos, preRequisito = :preRequisito, idDisciplina = :id WHERE idDisciplina = :id";
+    $sql = "UPDATE disciplina SET nomeDisciplina = :nome, ch = :ch, quantAlunos = :quantAlunos, preRequisito = :preRequisito, id = :id, semestre = :semestre, idprofessor = :idprofessor WHERE id = :id";
 
     // $sql = "UPDATE Aluno SET nomeAluo = :nome";
 
@@ -40,7 +44,8 @@ if(isset($_POST['alterarDis'])){
     $stmt->bindParam(':ch', $ch, PDO::PARAM_INT);
     $stmt->bindParam(':preRequisito', $preRequisito, PDO::PARAM_STR);
     $stmt->bindParam(':quantAlunos', $quantAluno, PDO::PARAM_STR);
-
+    $stmt->bindParam(':semestre', $semestre, PDO::PARAM_STR);
+    $stmt->bindParam(':idprofessor', $idprofessor, PDO::PARAM_STR);
     $stmt->execute();
 
     header("Location: listaDis.php");
@@ -51,7 +56,7 @@ if(isset($_GET['excluirDis'])){
 
     $idDis = $_GET['id'];
 
-    $sql = "DELETE FROM Disciplina WHERE idDisciplina={$idDis} LIMIT 1";
+    $sql = "DELETE FROM disciplina WHERE id={$idDis} LIMIT 1";
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $conn->prepare($sql);

@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="../javascript/index.js"></script>
+    <script src="../javascript/logica.js"></script>
     <link rel="stylesheet" href="../style/stylecadastro.css">
+
 </head>
 
 <body>
@@ -16,7 +17,7 @@
 
     $id = $_POST['id'];
 
-    $sql = "SELECT * FROM Aluno WHERE idAluno = :id";
+    $sql = "SELECT * FROM aluno WHERE id = :id";
 
     $retorno = $conn->prepare($sql);
 
@@ -26,13 +27,14 @@
 
     $array_retorno = $retorno->fetch();
 
-    $nome = $array_retorno['nomeAluno'];
-    $idade = $array_retorno['idadeAluno'];
+    $nome = $array_retorno['nome'];
+    $idade = $array_retorno['idade'];
     $turma = $array_retorno['turma'];
-    $matricula = $array_retorno['matriculaAluno'];
+    $matricula = $array_retorno['matricula'];
     $cpf = $array_retorno['cpf'];
     $estatus = $array_retorno['estatus'];
-
+    $data = $array_retorno['datanascimento'];
+    $endereco = $array_retorno['endereco'];
     ?>
 
     <section id="formulario">
@@ -47,6 +49,13 @@
                     <label for="input-field" class="input-label">Nome:</label>
                     <span class="input-highlight"></span>
                 </div>
+                <div class="input-container">
+                    <input placeholder="Endereço" class="input-field" type="text" name="endereco" value="<?= $endereco ?>"
+                        required>
+                    <label for="input-field" class="input-label">Endereço:</label>
+                    <span class="input-highlight"></span>
+                </div>
+
 
 
                 <div class="input-container metade">
@@ -72,13 +81,19 @@
 
                 <div class="input-container">
                     <input placeholder="CPF" class="input-field" type="text" value="<?= $cpf?>" minlength="14" name="cpfAluno"
-                    id="meuInput">
+                    id="meuInput" oninput="mascara(this)">
                     <label for="input-field" class="input-label">CPF:</label>
                     <span class="input-highlight"></span>
                 </div>
-                <div class="input-container">
+                <div class="input-container metade">
                     <input placeholder="AP ou RP" class="input-field" type="text" name="estatus" required value="<?=strtoupper($estatus)?>" oninput="validarInput(this)">
                     <label for="input-field" class="input-label">Status</label>
+                    <span class="input-highlight"></span>
+                </div>
+
+                <div class="input-container metade">
+                    <input placeholder="Data de nascimento" class="input-field" type="date" value="<?php echo "$data";?>" name="dataNascimento" required>
+                    <label for="input-field" class="input-label">Data de nascimento:</label>
                     <span class="input-highlight"></span>
                 </div>
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="../javascript/indexx.js"></script>
+    <script src="../javascript/logica.js"></script>
     <link rel="stylesheet" href="../style/stylecadastro.css">
 </head>
 
@@ -16,7 +16,7 @@
     $id = $_POST['id'];
 
 
-    $sql = "SELECT * FROM Professor WHERE idProfessor = :id";
+    $sql = "SELECT * FROM professor WHERE id = :id";
 
     $retorno = $conn->prepare($sql);
 
@@ -26,12 +26,14 @@
 
     $array_retorno = $retorno->fetch();
 
-    $nome = $array_retorno['nomeProfessor'];
-    $idade = $array_retorno['idadeProfessor'];
+    $nome = $array_retorno['nome'];
+    $idade = $array_retorno['idade'];
     $matricula = $array_retorno['matricula'];
     $areaAtuacao = $array_retorno['areaAtuacao'];
     $cpfProfessor = $array_retorno['cpf'];
-    $estatus = $array_retorno['estatusProfessor'];
+    $estatus = $array_retorno['estatus'];
+    $datanascimento = $array_retorno['datanascimento'];
+    $endereco = $array_retorno['endereco'];
 
 
     ?>
@@ -46,6 +48,14 @@
                     <label for="input-field" class="input-label">Nome:</label>
                     <span class="input-highlight"></span>
                 </div>
+
+                <div class="input-container">
+                    <input placeholder="Endereço" value="<?= $endereco?>" class="input-field" maxlength="50" type="text" name="endereco"
+                        required>
+                    <label for="input-field" class="input-label">Endereço:</label>
+                    <span class="input-highlight"></span>
+                </div>
+
 
                 <div class="input-container maior">
                     <input placeholder="Área atuação" class="input-field" type="text" name="areaAtuacao" value="<?= $areaAtuacao?>" required>
@@ -70,14 +80,21 @@
                     <label for="input-field" class="input-label">CPF:</label>
                     <span class="input-highlight"></span>
                 </div>
-                <div class="input-container">
+                <div class="input-container metade">
                     <select placeholder="Selectione o estatus do professor" name="estatus" id="iestatus">
                         <option <?php if($estatus == 1){echo 'selected';}?> value="ativo">Ativo</option>
                         <option <?php if($estatus == 0){echo 'selected';}?> value="inativo">Inativo</option>
                     </select>
-                    <label for="input-field" class="input-label">Estatus</label>
+                    <label for="input-field" class="input-label">Estatus:</label>
                     <span class="input-highlight"></span>
                 </div>
+
+                <div class="input-container metade">
+                    <input placeholder="Data nascimento" value="<?= $datanascimento?>" class="input-field" type="date" name="dataNascimento" required>
+                    <label for="input-field" class="input-label">Data nascimento:</label>
+                    <span class="input-highlight"></span>
+                </div>
+
                 <input type="hidden" name="id" value="<?= $id?>" >
                 <div class="botoes">
                     <a href="listaProfessores.php">Voltar</a>

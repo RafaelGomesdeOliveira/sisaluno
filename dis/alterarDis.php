@@ -15,7 +15,7 @@
     $id = $_POST['id'];
 
 
-    $sql = "SELECT * FROM Disciplina WHERE idDisciplina = :id";
+    $sql = "SELECT * FROM disciplina WHERE id = :id";
 
     $retorno = $conn->prepare($sql);
 
@@ -25,10 +25,12 @@
 
     $array_retorno = $retorno->fetch();
 
-    $nome = $array_retorno['nomeDisciplina'];
+    $nome = $array_retorno['nomedisciplina'];
     $ch = $array_retorno['ch'];
     $quantAluno = $array_retorno['quantAlunos'];
     $preRequisito = $array_retorno['preRequisito'];
+    $idprofessor = $array_retorno['idprofessor'];
+    $semestre = $array_retorno['semestre'];
 
 
     ?>
@@ -45,13 +47,13 @@
                     <span class="input-highlight"></span>
                 </div>
 
-                <div class="input-container">
-                    <input placeholder="Quantidade de alunos" class="input-field" type="number" name="quantAluno" required min="0" value="<?= $quantAluno?>" >
-                    <label for="input-field" class="input-label">Quantidade  de aluno:</label>
+                <div class="input-container metade">
+                    <input placeholder="N° alunos" class="input-field" type="number" name="quantAluno" required min="0" value="<?= $quantAluno?>" >
+                    <label for="input-field" class="input-label">N°alunos:</label>
                     <span class="input-highlight"></span>
                 </div>
 
-                <div class="input-container">
+                <div class="input-container metade">
                     <input placeholder="Carga horária" class="input-field" type="number" name="ch" required min="1" value="<?= $ch?>" >
                     <label for="input-field" class="input-label">Carga horária:</label>
                     <span class="input-highlight"></span>
@@ -62,6 +64,19 @@
                     <label for="input-field" class="input-label">Pré-requisito:</label>
                     <span class="input-highlight"></span>
                 </div>
+
+                <div class="input-container metade">
+                    <input placeholder="ID Professor" class="input-field" value="<?= $idprofessor?>" type="text" name="idprofessor" required>
+                    <label for="input-field" class="input-label">ID Professor:</label>
+                    <span class="input-highlight"></span>
+                </div>
+
+                <div class="input-container metade">
+                    <input placeholder="Semestre" class="input-field" type="text" value="<?= $semestre?>" name="semestre" required>
+                    <label for="input-field" class="input-label">Semestre:</label>
+                    <span class="input-highlight"></span>
+                </div>
+
                 <input type="hidden" name="id" value="<?= $id?>" >
                 <div class="botoes">
                     <a href="listaDis.php">Voltar</a>

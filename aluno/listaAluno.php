@@ -1,7 +1,7 @@
 <?php
 include_once('../conexao.php');
 
-$retorno = $conn->prepare('SELECT * FROM Aluno');
+$retorno = $conn->prepare('SELECT * FROM aluno');
 $retorno->execute();
 
 ?>
@@ -20,23 +20,35 @@ $retorno->execute();
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
   <link rel="stylesheet" href="../style/lista.css">
 
 </head>
 
 <body>
+  <?php
+  if (isset($_GET['alerta'])) {
+    ?>
+    <script>
+      alert("A sua data de nascimento ou sua idade não pode ser alterada, porque a data de nascimento não condiz com a sua idade");
+    </script>
+    <?php
+  }
+  ?>
   <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Nome</th>
+        <th scope="col">Endereço</th>
         <th scope="col">Turma</th>
         <th scope="col">Idade</th>
         <th scope="col">Matrícula</th>
         <th scope="col">CPF</th>
         <th scope="col">Status</th>
+        <th scope="col">Data de nascimento</th>
         <th scope="col">Alterar</th>
         <th scope="col">Excluir</th>
       </tr>
@@ -45,19 +57,22 @@ $retorno->execute();
       <tbody>
         <tr>
           <th scope="row">
-            <?= $value['idAluno'] ?>
+            <?= $value['id'] ?>
           </th>
           <td>
-            <?= $value['nomeAluno'] ?>
+            <?= $value['nome'] ?>
+          </td>
+          <td>
+            <?= $value['endereco'] ?>
           </td>
           <td>
             <?= strtoupper($value['turma']) ?>
           </td>
           <td>
-            <?= $value['idadeAluno'] ?>
+            <?= $value['idade'] ?>
           </td>
           <td>
-            <?= $value['matriculaAluno'] ?>
+            <?= $value['matricula'] ?>
           </td>
           <td>
             <?= $value['cpf'] ?>
@@ -71,8 +86,16 @@ $retorno->execute();
             ?>
           </td>
           <td>
+            <?php
+            $dataNas = $value['datanascimento'];
+            $dataEmTempo = strtotime($dataNas);
+            $dataAjustada = date("d/m/Y", $dataEmTempo);
+            echo "$dataAjustada";
+            ?>
+          </td>
+          <td>
             <form action="alterarAluno.php" method="post">
-              <input type="hidden" name="id" value="<?= $value['idAluno'] ?>">
+              <input type="hidden" name="id" value="<?= $value['id'] ?>">
               <button class="btn centro alterar" type="submit" name="alterarAluno">Alterar<ion-icon
                   name="construct"></ion-icon>
               </button>
@@ -80,15 +103,15 @@ $retorno->execute();
           </td>
           <td>
             <form action="cudrAluno.php" method="get">
-              <input type="hidden" name="id" value="<?= $value['idAluno'] ?>">
+              <input type="hidden" name="id" value="<?= $value['id'] ?>">
               <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                data-bs-target="#exampleModal<?php echo $value['idAluno'] ?>">
+                data-bs-target="#exampleModal<?php echo $value['id'] ?>">
                 Excluir<ion-icon name="trash-sharp"></ion-icon>
               </button>
 
               <!-- Modal -->
-              <div class="modal fade" id="exampleModal<?php echo $value['idAluno'] ?>" tabindex="-1"
-                aria-labelledby="exampleModalLabel<?php echo $value['idAluno'] ?>" aria-hidden="true">
+              <div class="modal fade" id="exampleModal<?php echo $value['id'] ?>" tabindex="-1"
+                aria-labelledby="exampleModalLabel<?php echo $value['id'] ?>" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -99,17 +122,17 @@ $retorno->execute();
                       <p>Deseja realmente excluir o aluno
                         <strong>
                           <?php
-                          echo $value['nomeAluno'];
+                          echo $value['nome'];
                           ?>
                         </strong>
                         do
                         <strong>
-                        <?php echo strtoupper($value['turma']);?>
+                          <?php echo strtoupper($value['turma']); ?>
                         </strong>
-                        de id igual a <strong> 
-                        <?php 
-                        echo $value['idAluno'];
-                        ?>
+                        de id igual a <strong>
+                          <?php
+                          echo $value['id'];
+                          ?>
                         </strong>
                         ?
                       </p>
@@ -117,7 +140,7 @@ $retorno->execute();
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                       <form action="cudrAluno.php" method="get">
-                        <input type="hidden" name="id" value="<?= $value['idAluno'] ?>">
+                        <input type="hidden" name="id" value="<?= $value['id'] ?>">
                         <button class="btn btn-primary" type="submit" name="excluirAluno">Confirmar</button>
                       </form>
                     </div>
